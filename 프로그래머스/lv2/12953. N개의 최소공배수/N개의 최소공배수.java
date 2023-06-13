@@ -15,11 +15,9 @@ class Solution {
     }
     
     public static int gcd(int a, int b) {  //최대 공약수 함수
-        int r = a % b;
-        if(r == 0){
-            return b;
-        }else{
-            return gcd(b, r);    
-        }
+        if(b==0) {
+			return a;
+		}
+		return gcd(b, a % b);
     }
 }
