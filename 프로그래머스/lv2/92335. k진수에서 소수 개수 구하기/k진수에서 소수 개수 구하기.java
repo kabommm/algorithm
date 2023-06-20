@@ -6,7 +6,7 @@ class Solution {
         String[] arr = str.split("0");  //0을 기준으로 끊어서 배열에 담기
         
         for(String s: arr){  //배열 반복문
-            if(s.equals("")) {
+            if(s.equals("")) {  //?????
                 continue;
             }
             //Long형으로 변환 Long.parseLong                      
