@@ -2,50 +2,49 @@ import java.util.*;
 class Solution {
     public int solution(String dirs) {
         int answer = 0;
-        HashSet<String> set = new HashSet<>();
-        int x = 0;
-        int y = 0;
-        
-        for(int i=0; i<dirs.length(); i++){
-            int gpsX = x;
-            int gpsY = y;
-            String str = "";     
-//0001, -1, (-1,2), (0,2), (1,2), (1,1), (0,1), (-1,1), (-1,2)
-//(-1,0), (-1,1), (-2,1), (-3,1), (-4,1), (-5,1), x(-6,1), x(-6,1), (-5,2)
-            if(dirs.charAt(i) == 'U'){
-                ++gpsY;
-                str += x;
-                str += y;
-                str += gpsX;
-                str += gpsY;    //이곳
-            }else if(dirs.charAt(i) == 'D'){
-                --gpsY;
-                str += gpsX;
-                str += gpsY;    //이곳
-                str += x;
-                str += y;
-            }else if(dirs.charAt(i) == 'R'){
-                ++gpsX;
-                str += x;
-                str += y;
-                str += gpsX;    //이곳
-                str += gpsY;
-            }else if(dirs.charAt(i) == 'L'){
-                --gpsX;
-                str += gpsX;    //이곳
-                str += gpsY;
-                str += x;
-                str += y;
+        int[][][] visit = new int[11][11][4];   //x, y, 문자
+
+        int x = 5;
+        int y = 5;
+        int dx[] = { 0, 0, -1, 1 };
+        int dy[] = { 1, -1, 0, 0 };
+
+        for (int i = 0; i < dirs.length(); i++) {
+            char ch = dirs.charAt(i);
+            int idx = 0;
+            int reflact = 0;
+
+            if (ch == 'U') {
+                idx = 0;
+                reflact = 1;
+            } else if (ch == 'D') {
+                idx = 1;
+                reflact = 0;
+            } else if (ch == 'L') {
+                idx = 2;
+                reflact = 3;
+            } else if (ch == 'R') {
+                idx = 3;
+                reflact = 2;
+            }
+
+            if (x + dx[idx] < 0 || x + dx[idx] > 10 || y + dy[idx] < 0 || y + dy[idx] > 10){
+                continue;
             }
             
-            //범위 벗어나면 무시
-            if(gpsX < -5 || gpsY < -5 || gpsX > 5 || gpsY > 5){
-                 continue;
+            if (visit[x][y][idx] == 0 && visit[x+dx[idx]][y+dy[idx]][reflact] == 0) {
+                visit[x][y][idx] = 1;
+                visit[x+ dx[idx]][y+ dy[idx]][reflact] = 1;
+                answer++;
             }
-            set.add(str);
-            x = gpsX;
-            y = gpsY;
+
+
+            x += dx[idx];
+            y += dy[idx];
+
+
         }
+        
 //         int arr[] = {0,0};
 //         HashSet<String> set = new HashSet<>();
 //         //이동할 때마다 좌표를 저장하고 그 좌표를 조회해서 중복이 아니면 answer++
@@ -77,7 +76,7 @@ class Solution {
 //             }
 //             }
         
-        answer = set.size();
+//         answer = set.size();
         return answer;
     }
 }
