@@ -11,7 +11,7 @@ public class Main {
         for(int i=0; i<N; i++){
             arr[i]  = sc.next();
         }
-        //단순 배열의 원소가 아닌 원소의 길이에 따라 정렬해야 하므로 compareTo 함수를 이용한다(람다식 표현)
+        //단순 배열의 원소가 아닌 원소의 길이에 따라 정렬해야 하므로 오름차순 식을 사용하고 같은 경우는 조건문에서 compareTo 함수를 이용한다(람다식 표현)
         Arrays.sort(arr, (s1, s2) -> {
             // 단어 길이가 같을 경우
             if (s1.length() == s2.length()) {
