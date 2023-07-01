@@ -17,8 +17,8 @@ public class Main {
         for (HashMap.Entry<String, Integer> entry : map.entrySet()) {
             // value 가 최대 값이거나(가장 많이 팔린)
             // 최대 값이 같으면 Title(책 이름) 사전순
-            if(entry.getValue() > max || (entry.getValue() == max &&
-                    entry.getKey().compareTo(maxTitle) < 0)){
+            if(entry.getValue() > max || (entry.getValue() == max && entry.getKey().compareTo(maxTitle) < 0)){
+            // 두 개의 문자열을 앞에서부터 순차적으로 비교 -> 두 문자열이 같다면 0, 작으면 음수를, 크면 양수를 반환
                 maxTitle = entry.getKey();
                 max = entry.getValue();
             }
