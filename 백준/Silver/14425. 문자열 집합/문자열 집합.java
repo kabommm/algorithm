@@ -44,6 +44,10 @@ public class Main {
             if(isExist(arr,str)){
                 ans++;
             }
+            //binarySearch 함수 사용
+//            if (Arrays.binarySearch(arr, str) >= 0){
+//                ans++;
+//            }
         }
         System.out.println(ans);
     }
