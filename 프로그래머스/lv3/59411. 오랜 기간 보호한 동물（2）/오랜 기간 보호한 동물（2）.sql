@@ -5,4 +5,5 @@ FROM ANIMAL_INS ins
 INNER JOIN ANIMAL_OUTS outs # 모든 열이 같으므로 INNER JOIN
 ON ins.ANIMAL_ID = outs.ANIMAL_ID   # 외래키 조인
 ORDER BY outs.DATETIME-ins.DATETIME DESC # 보호 기간이 긴 순
+        # 또는 DATEDIFF 함수를 이용: DATEDIFF(outs.DATETIME, ins.DATETIME)
 LIMIT 2;    # 동물 두 마리
