@@ -21,17 +21,17 @@ class Solution {
                 int rightdist = Math.abs(numbers[i]-right)/3
                     + Math.abs(numbers[i]-right) % 3;
                 
-                if(leftdist<rightdist){
+                if(leftdist<rightdist){ //왼편이 더 가깝다
                     answer+="L";
                     left = numbers[i];
-                }else if(leftdist>rightdist){
+                }else if(leftdist>rightdist){   //오른편이 더 가깝다
                     answer+="R";
                     right = numbers[i];
-                }else{
-                    if(hand.equals("left")){
+                }else{  //leftdist=rightdist    거리가 같다
+                    if(hand.equals("left")){    //왼손잡이면
                         answer+="L";
                         left = numbers[i];
-                    }else{
+                    }else{  //오른손잡이면
                         answer+="R";
                         right = numbers[i];
                     }
