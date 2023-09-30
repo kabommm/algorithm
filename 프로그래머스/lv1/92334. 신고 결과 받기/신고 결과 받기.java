@@ -4,49 +4,25 @@ class Solution {
         
         int[] answer = new int[id_list.length];
         
-        HashMap<String, HashSet<String>> reporterInfoMap = new HashMap<>();
-        HashMap<String, Integer> reportedCountInfoMap = new HashMap<>();
-        
-      for(String reportInfo : report){
-          String reporter = reportInfo.split(" ")[0];  // 신고자
-          String reported = reportInfo.split(" ")[1];  // 피신고자
-          boolean flag = false;
-            
-          if(reporterInfoMap.containsKey(reporter)){
-              if(reporterInfoMap.get(reporter).contains(reported)){
-                  // 이미 신고한 유저를 또 신고했을 경우
-                  flag = true;
-              } else {
-                  reporterInfoMap.get(reporter).add(reported);    
-              }
-          } else {
-              reporterInfoMap.put(reporter, new HashSet<String>(){{
-                  add(reported);
-              }});
-          }
-            
-          if (flag) {
-              continue;
-          } else if (reportedCountInfoMap.containsKey(reported)){
-              reportedCountInfoMap.put(reported, reportedCountInfoMap.get(reported)+1);
-          } else {
-              reportedCountInfoMap.put(reported, 1);
-          }
-      }
-        
-      for (String reported : reportedCountInfoMap.keySet()){
-          int reportedCount = reportedCountInfoMap.get(reported);
-          if(reportedCount >= k){
-              // 메일 발송 대상
-              for(int i=0; i<id_list.length; i++){
-                  if(reporterInfoMap.get(id_list[i]) == null){
-                      answer[i] = 0;
-                  } else if(reporterInfoMap.get(id_list[i]).contains(reported)){
-                      answer[i]++;
-                  }
-              }
-          }
-      }
+        HashSet<String> report_set = new HashSet<>(Arrays.asList(report));
+        HashMap<String, Integer> reported = new HashMap<>();
+
+        //HashMap에 id_list를 저장
+        for (String user_id: id_list) {
+            reported.put(user_id, 0);
+        }
+        //HashMap에 피신고자의 누적 횟수를 저장
+        for (String i: report_set) {
+            reported.put(i.split(" ")[1], reported.get(i.split(" ")[1]) + 1);
+        }
+
+        for (String i: report_set) {
+            //피신고자가 기준 k횟수보다 누적 신고값이 크면
+            if (reported.get(i.split(" ")[1]) >= k) {
+                answer[Arrays.asList(id_list).indexOf(i.split(" ")[0])] += 1;
+            }
+        }
+
       return answer;
     }
 }
