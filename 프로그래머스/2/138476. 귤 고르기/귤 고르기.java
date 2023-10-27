@@ -14,7 +14,8 @@ class Solution {
         
         // Value 값으로 내림차순 정렬
         Collections.sort(keySet, (o1, o2) -> {  //list는 Collections
-            return map.get(o2).compareTo(map.get(o1));   
+            return map.get(o2) - map.get(o1);   
+            // return map.get(o2).compareTo(map.get(o1));  
         });
         
         for (int i : keySet) {
