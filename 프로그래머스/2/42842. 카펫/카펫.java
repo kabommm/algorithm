@@ -8,8 +8,9 @@ class Solution {
                 int col = i;
                 int row = sum/i;
                 //가로가 세로보다 같거나 크며 노란 격자가 가운데 존재하기 위해선 (가로 - 2) * (세로 - 2 ) = yellow
-                if(col>=row && (col-2)*(row-2) == yellow){                                       answer[0] = col;
-                    answer[1] = row;      
+                if((col-2)*(row-2) == yellow){                                       
+                    answer[0] = row;
+                    answer[1] = col;      
                     break;
                 }
             }
